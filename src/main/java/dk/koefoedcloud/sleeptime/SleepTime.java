@@ -13,8 +13,9 @@ import net.minecraft.world.World;
 import org.lwjgl.glfw.GLFW;
 
 public class SleepTime implements ClientModInitializer {
+
 	private KeyBinding toggleKey;
-    public boolean isOn = false;
+	private boolean isOn = false;
 
 	@Override
 	public void onInitializeClient() {
@@ -30,6 +31,9 @@ public class SleepTime implements ClientModInitializer {
 			}
 			World world = player.getWorld();
 			if (world == null) {
+				return;
+			}
+			if (world.isThundering()) {
 				return;
 			}
 			long tick = world.isRaining() ? 12010 : 12542;
